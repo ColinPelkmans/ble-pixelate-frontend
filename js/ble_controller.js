@@ -1,6 +1,6 @@
 class BleController extends EventTarget {
 
-  static CONTROLLER_SERVICE = 'ecceef7c-2d85-4b1a-889b-5dd536de1d38';
+  static CONTROLLER_SERVICE = 'dd946d7a-baa0-4283-bd83-e4d4b8e7bb1e';
   static TOUCH_CHARACTERISTIC = '095986db-2085-4515-92fb-5dbb8179780c';
 
   constructor() {
@@ -21,19 +21,19 @@ class BleController extends EventTarget {
           }
         ]
       })
-      .then(dev => {
-        this.device = dev;
-        log('Connecting to GATT Server ...');
-        return this.device.gatt.connect();
-      })
-      .then(server => {
-        log('Connected to GATT server');
-        this.subscribe_to_touch_characteristic();
-        resolve(null)
-      }).catch((error) => {
-        log(error)
-        reject("Failed to connect to BLE controller")
-      })
+        .then(dev => {
+          this.device = dev;
+          log('Connecting to GATT Server ...');
+          return this.device.gatt.connect();
+        })
+        .then(server => {
+          log('Connected to GATT server');
+          this.subscribe_to_touch_characteristic();
+          resolve(null)
+        }).catch((error) => {
+          log(error)
+          reject("Failed to connect to BLE controller")
+        })
     });
   }
 
