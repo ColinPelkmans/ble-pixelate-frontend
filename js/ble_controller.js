@@ -1,7 +1,7 @@
 class BleController extends EventTarget {
 
   static CONTROLLER_SERVICE = 'ecceef7c-2d85-4b1a-889b-5dd536de1d38';
-  static TOUCH_CHARACTERISTIC = 'ce8ec8f3-b582-4928-9db0-f6626f8b87c9';
+  static TOUCH_CHARACTERISTIC = '095986db-2085-4515-92fb-5dbb8179780c';
 
   constructor() {
     super();
@@ -10,9 +10,11 @@ class BleController extends EventTarget {
 
   connect() {
     log("Connecting to controller ...");
-    return new Promise((resolve, reject) => { navigator.bluetooth.requestDevice({
+    return new Promise((resolve, reject) => {
+      navigator.bluetooth.requestDevice({
         filters: [
-          {services: [
+          {
+            services: [
               // All accessible services need to be added
               BleController.CONTROLLER_SERVICE
             ]
@@ -40,19 +42,19 @@ class BleController extends EventTarget {
     if (this.device) {
       log('Getting Controller Service ...');
       this.device.gatt.getPrimaryService(BleController.CONTROLLER_SERVICE)
-      .then(service => {
-        log('Getting Touch Characteristic ...');
-        return service.getCharacteristic(BleController.TOUCH_CHARACTERISTIC);
-      })
-      .then(characteristic => {
-        return characteristic.startNotifications().then(_ => {
-          log('Subscribed to Touch notifications');
-          characteristic.addEventListener('characteristicvaluechanged', (e) => this.handleTouchEvent(e));
+        .then(service => {
+          log('Getting Touch Characteristic ...');
+          return service.getCharacteristic(BleController.TOUCH_CHARACTERISTIC);
+        })
+        .then(characteristic => {
+          return characteristic.startNotifications().then(_ => {
+            log('Subscribed to Touch notifications');
+            characteristic.addEventListener('characteristicvaluechanged', (e) => this.handleTouchEvent(e));
+          });
+        })
+        .catch(error => {
+          log('ERROR ' + error);
         });
-      })
-      .catch(error => {
-        log('ERROR ' + error);
-      });
     }
   }
 
