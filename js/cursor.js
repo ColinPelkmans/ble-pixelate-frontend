@@ -4,7 +4,7 @@ class Cursor {
         this.xLoc = 0;
         this.yLoc = 0;
         this.display = display;
-        this.color = {r:200, g:100, b:10};
+        this.color = { r: 200, g: 100, b: 10 };
     }
 
     move_right() {
@@ -24,8 +24,8 @@ class Cursor {
     }
 
     move(deltaX, deltaY) {
-        this.xLoc = Math.max(0, Math.min(this.xLoc + deltaX, Display.WIDTH-1));
-        this.yLoc = Math.max(0, Math.min(this.yLoc + deltaY, Display.HEIGHT-1));
+        this.xLoc = Math.max(0, Math.min(this.xLoc + deltaX, Display.WIDTH - 1));
+        this.yLoc = Math.max(0, Math.min(this.yLoc + deltaY, Display.HEIGHT - 1));
         display.highlight(this.xLoc, this.yLoc, this.color);
     }
 
