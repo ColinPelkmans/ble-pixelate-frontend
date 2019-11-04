@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         case 'L': cursor.move_left(); break;
                         case 'U': cursor.move_up(); break;
                         case 'D': cursor.move_down(); break;
-                        case 'X': cursor.colorize({ r: 100, g: 0, b: 0 }); break;
-                        case 'A': cursor.colorize({ r: 0, g: 100, b: 0 }); break;
                         case 'B': cursor.colorize({ r: 0, g: 0, b: 100 }); break;
+                        case 'A': cursor.colorize({ r: 0, g: 100, b: 0 }); break;
+                        case 'X': cursor.colorize({ r: 100, g: 0, b: 0 }); break;
                     }
                 });
             }).catch((error) => {
